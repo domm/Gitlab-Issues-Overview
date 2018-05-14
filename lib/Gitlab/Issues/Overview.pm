@@ -30,7 +30,7 @@ sub app {
 <tbody>};
 
         my %seen;
-        foreach my $l ( 'Doing', 'showstopper', 'critical', 'To do', 'To Do','todo', 'bug' ) {
+        foreach my $l ( 'Doing', 'showstopper', 'critical', 'ToDo', 'bug' ) {
             my $issues = $self->gitlab_client->paginator('global_issues',
                 {   state  => 'opened',
                     scope  => 'all',
