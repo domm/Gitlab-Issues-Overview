@@ -30,14 +30,13 @@ sub app {
 <tbody>};
 
         my %seen;
-        foreach my $l ( 'critical', 'showstopper', 'bug', 'To do', 'todo',
-            'Doing' ) {
-            my $issues = $self->gitlab_client->global_issues(
+        foreach my $l ( 'Doing', 'showstopper', 'critical', 'To do', 'To Do','todo', 'bug' ) {
+            my $issues = $self->gitlab_client->paginator('global_issues',
                 {   state  => 'opened',
                     scope  => 'all',
                     labels => $l,
                 }
-            );
+            )->all;
             foreach my $issue (@$issues) {
                 next if $seen{ $issue->{id} }++;
 
