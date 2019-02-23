@@ -4,6 +4,6 @@
 ## Run via Docker
 
 * `docker build . -t gitlab-issues-overview`
-* `docker run --env-file desther.docker-env --rm -ti -p 7007:5000 gitlab-issues-overview`
+* `docker run --env-file desther.docker-env -p 7007:5000 gitlab-issues-overview`
 
 
