@@ -1,7 +1,7 @@
 package Gitlab::Issues::Overview;
 use strict;
 use warnings;
-use 5.024;
+use 5.028;
 use base qw(Class::Accessor::Fast);
 
 # ABSTRACT: List issues over all projects by multiple labels
@@ -12,7 +12,7 @@ use Encode;
 use Path::Tiny;
 use JSON::MaybeXS qw(encode_json decode_json);
 
-__PACKAGE__->mk_ro_accessors(qw(gitlab_client projects_file));
+__PACKAGE__->mk_ro_accessors(qw(gitlab_client projects_file labels));
 
 sub app {
     my $self = shift;
@@ -30,7 +30,7 @@ sub app {
 <tbody>};
 
         my %seen;
-        foreach my $l ( 'Doing', 'showstopper', 'critical', 'ToDo', 'bug' ) {
+        foreach my $l ( $self->labels->@* ) {
             my $issues = $self->gitlab_client->paginator('global_issues',
                 {   state  => 'opened',
                     scope  => 'all',
