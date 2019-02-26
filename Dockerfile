@@ -2,9 +2,9 @@ FROM perl:5.28
 
 RUN adduser --disabled-password --disabled-login --gecos "perl user" --home /home/perl perl
 
-ADD lib .
-ADD bin .
-ADD cpanfile .
+COPY cpanfile .
+COPY bin .
+COPY lib .
 
 RUN cpanm -n --installdeps .
 

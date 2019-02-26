@@ -1,9 +1,22 @@
 # Gitlab::Issues::Overview
 
+## Config (via Env vars)
+
+* GITLAB_API_URL - the URL to your gitlab instance, eg `https://gitlab.example.com/api/v4`
+* GITLAB_PRIVATE_TOKEN - your gitlab access token
+* LABELS - a comma-or-space seperated list of labels you want to view. Case sensitive!
+
+## Install / run via local perl
+
+* `cpanm -n --installdeps .`
+* `export GITLAB_API_URL=...`
+* `export GITLAB_PRIVATE_TOKEN=...`
+* `export LABELS=...`
+* `plackup -Ilib --no-default-middleware -s Starman bin/gitlab-issues-overview.psgi`
 
 ## Run via Docker
 
 * `docker build . -t gitlab-issues-overview`
-* `docker run --env-file desther.docker-env -p 7007:5000 gitlab-issues-overview`
-
+* `docker run -e GITLAB_API_URL=.. -e GITLAB_PRIVATE_TOKEN=.. -e LABELS=.. -p 7007:5000 gitlab-issues-overview`
+* or put envs into a file: `docker run --env-file your-env -p 7007:5000 gitlab-issues-overview`
 
